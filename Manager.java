@@ -77,12 +77,12 @@ public class Manager {
         this.removeDeletedObjects();
     }
     
-    private void posliSpravu(String selektor, int prvyParameter, int druhyParameter) {
+    private void posliSpravu(String selektor, int firstParameter, int secondParameter) {
         for (Object adresat : this.managedObjects) {
             try {
                 if (adresat != null) {
                     Method command = adresat.getClass().getMethod(selektor, Integer.TYPE, Integer.TYPE);
-                    command.invoke(adresat, prvyParameter, druhyParameter);
+                    command.invoke(adresat, firstParameter, secondParameter);
                 }
             } catch (SecurityException e) {
                 this.doNothing();
@@ -114,7 +114,7 @@ public class Manager {
     }
     
     /**
-     * Vytvori novy manazer, doen't exist.
+     * Create new manager, if it doesn't exist.
      */
     public Manager() {
         this.managedObjects= new ArrayList<Object>();
