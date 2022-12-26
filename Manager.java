@@ -114,7 +114,7 @@ public class Manager {
     }
     
     /**
-     * Vytvori novy manazer, ktory nespravuje zatial ziadne objekty.
+     * Vytvori novy manazer, doen't exist.
      */
     public Manager() {
         this.managedObjects= new ArrayList<Object>();
@@ -125,10 +125,10 @@ public class Manager {
     }
     
     /**
-     * Manazer bude spravovat dany objekt.
+     * Manager sends commands to the sertain object.
      */
-    public void spravujObjekt(Object objekt) {
-        this.managedObjects.add(objekt);
+    public void manageObjects(Object objects) {
+        this.managedObjects.add(objects);
     }
     
     /**
