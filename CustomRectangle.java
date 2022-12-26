@@ -79,7 +79,7 @@ public class CustomRectangle {
     }
 
     /**
-     * (Rectangle) Move Horizontally according to the parameter.
+     * (Rectangle) Move Vertically according to the parameter.
      */
     public void moveVertical(int distance) {
         this.delete();
@@ -88,69 +88,68 @@ public class CustomRectangle {
     }
 
     /**
-     * (Obdĺžnik) Posuň sa pomaly vodorovne o dĺžku danú parametrom.
+     * (Rectangle) Move slowly Horizontally according to the parameter.
      */
-    public void pomalyPosunVodorovne(int vzdialenost) {
+    public void moveSlowlyHoriizontally(int distance) {
         int delta;
 
-        if (vzdialenost < 0) {
+        if (distance < 0) {
             delta = -1;
-            vzdialenost = -vzdialenost;
+            distance = -distance;
         } else  {
             delta = 1;
         }
 
-        for (int i = 0; i < vzdialenost; i++) {
+        for (int i = 0; i < distance; i++) {
             this.leftTopX += delta;
             this.draw();
         }
     }
 
     /**
-     * (Obdĺžnik) Posuň sa pomaly vodorovne o dĺžku danú parametrom.
+     * (Rectangle) Move slowly Vertically according to the parameter.
      */
-    public void pomalyPosunZvisle(int vzdialenost) {
+    public void moveSlowlyVertically(int distance) {
         int delta;
 
-        if (vzdialenost < 0) {
+        if (distance < 0) {
             delta = -1;
-            vzdialenost = -vzdialenost;
+            distance = -distance;
         } else {
             delta = 1;
         }
 
-        for (int i = 0; i < vzdialenost; i++) {
+        for (int i = 0; i < distance; i++) {
             this.leftTopY += delta;
             this.draw();
         }
     }
 
     /**
-     * (Obdĺžnik) Zmeň dĺžky strán na hodnoty dané parametrami.
-     * Dĺžka strany musí byť nezáporné celé číslo.
+     * (Rectangle) Change side sizes on these parametres.
+     * The side size must be > 0
      */
-    public void zmenStrany(int stranaA, int stranaB) {
+    public void changeSide(int sideA, int sideB) {
         this.delete();
-        this.sideA = stranaA;
-        this.sideB = stranaB;
+        this.sideA = sideA;
+        this.sideB = sideB;
         this.draw();
     }
 
     /**
-     * (Obdĺžnik) Zmeň farbu na hodnotu danú parametrom.
-     * Nazov farby musí byť po anglicky.
-     * Možné farby sú tieto:
-     * červená - "red"
-     * žltá    - "yellow"
-     * modrá   - "blue"
-     * zelená  - "green"
-     * fialová - "magenta"
-     * čierna  - "black"
-     * biela   - "white"
-     * hnedá   - "brown"
+     * (Rectangle) Change the color on the printed value.
+     * Name of the color must be in English.
+     * Number of colors:
+     * blue;
+     * red;
+     * black;
+     * white;
+     * yellow;
+     * green;
+     * magenta.
      */
-    public void zmenFarbu(String farba) {
-        this.color = farba;
+    public void changeColor(String color) {
+        this.color = color;
         this.draw();
     }
 
@@ -159,7 +158,7 @@ public class CustomRectangle {
      */
     private void draw() {
         if (this.isVisible) {
-            Platno canvas = Platno.dajPlatno();
+            Poligon canvas = Poligon.getPoligon();
             canvas.draw(this, this.color,
                     new Rectangle(this.leftTopX, this.leftTopY, this.sideA, this.sideB));
             canvas.wait(10);
@@ -171,7 +170,7 @@ public class CustomRectangle {
      */
     private void delete() {
         if (this.isVisible) {
-            Platno canvas = Platno.dajPlatno();
+            Poligon canvas = Poligon.getPoligon();
             canvas.erase(this);
         }
     }
