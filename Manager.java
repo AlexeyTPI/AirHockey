@@ -134,7 +134,7 @@ public class Manager {
     /**
      * Manager sends commands to the sertain object.
      */
-    public void prestanSpravovatObjekt(Object objekt) {
+    public void stopManagingObject(Object object) {
         int index = this.managedObjects.indexOf(objekt);
         if (index >= 0) {
             this.managedObjects.set(index, null);
