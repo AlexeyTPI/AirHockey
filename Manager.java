@@ -44,7 +44,7 @@ public class Manager {
         }
     }
     
-    private class Manager implements ActionListener {
+    private class ManagerM implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             long newTick = System.nanoTime();
             if (newTick - Manager.this.oldTick >= Manager.TICK_LENGTH || newTick < Manager.TICK_LENGTH) {
@@ -135,7 +135,7 @@ public class Manager {
      * Manager sends commands to the sertain object.
      */
     public void stopManagingObject(Object object) {
-        int index = this.managedObjects.indexOf(objekt);
+        int index = this.managedObjects.indexOf(object);
         if (index >= 0) {
             this.managedObjects.set(index, null);
             this.deletedObjects.add(index);

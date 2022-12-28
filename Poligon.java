@@ -20,10 +20,6 @@ import java.util.ArrayList;
  * This is a modification of the general purpose Canvas, specially made for
  * the BlueJ "shapes" example.
  *
- * @author: Bruce Quig
- * @author: Michael Kolling (mik)
- *
- * @version: 1.6.1 (shapes)
  *
  */
 
@@ -47,10 +43,13 @@ public class Poligon {
 
 
 
+
+
+
     /**
      * Factory method to get the canvas singleton object.
      */
-    public static Poligon getPlatno() {
+    public static Poligon getPoligon() {
 
         if (Poligon.poligonSingleton == null) {
             Poligon.poligonSingleton = new Poligon("BlueJ Shapes Demo", widthPoligon, heightPoligon,
@@ -58,7 +57,7 @@ public class Poligon {
             background = new Rectangle();
             background.
             background.changeColor("blue");
-            background.zmenStrany(widthPoligon, heightPoligon - 100);
+            background.changeSides(widthPoligon, heightPoligon - 100);
             background.moveHorizontal(-60);
             background.moveVertical(-50);
             background.display();
@@ -78,31 +77,31 @@ public class Poligon {
     private JFrame frame;
     private CanvasPane canvas;
     private Graphics2D graphic;
-    private Color pozadie;
+    private Color background;
     private Image canvasImage;
     private Timer timer;
-    private List<Object> objekty;
-    private HashMap<Object, PopisTvaru> tvary;
+    private List<Object> objects;
+    private HashMap<Object, Visualdescription> visual;
 
     /**
      * Create a Canvas.
      * @param title  title to appear in Canvas Frame
      * @param width  the desired width for the canvas
      * @param height  the desired height for the canvas
-     * @param bgClour  the desired background colour of the canvas
+     * @param bgColor  the desired background colour of the canvas
      */
-    private Poligon(String titulok, int sirka, int vyska, Color pozadie) {
+    private Poligon(String Ntitle, int width, int height, Color background) {
         this.frame = new JFrame();
         this.canvas = new CanvasPane();
         this.frame.setContentPane(this.canvas);
-        this.frame.setTitle(titulok);
-        this.canvas.setPreferredSize(new Dimension(sirka, vyska));
+        this.frame.setTitle(Ntitle);
+        this.canvas.setPreferredSize(new Dimension(width, height));
         this.timer = new javax.swing.Timer(25, null);
         this.timer.start();
-        this.pozadie = pozadie;
+        this.backgroundR = background;
         this.frame.pack();
-        this.objekty = new ArrayList<Object>();
-        this.tvary = new HashMap<Object, PopisTvaru>();
+        this.objects = new ArrayList<Object>();
+        this.visual = new HashMap<Object, VisualDescription>();
     }
 
     /**
@@ -119,7 +118,7 @@ public class Poligon {
             Dimension size = this.canvas.getSize();
             this.canvasImage = this.canvas.createImage(size.width, size.height);
             this.graphic = (Graphics2D)this.canvasImage.getGraphics();
-            this.graphic.setColor(this.pozadie);
+            this.graphic.setColor(this.background);
             this.graphic.fillRect(0, 0, size.width, size.height);
             this.graphic.setColor(Color.black);
         }
@@ -135,10 +134,10 @@ public class Poligon {
     // Note: this is a slightly backwards way of maintaining the shape
     // objects. It is carefully designed to keep the visible shape interfaces
     // in this project clean and simple for educational purposes.
-    public void draw(Object objekt, String farba, Shape tvar) {
-        this.objekty.remove(objekt);   // just in case it was already there
-        this.objekty.add(objekt);      // add at the end
-        this.tvary.put(objekt, new PopisTvaru(tvar, farba));
+    public void draw(Object objects, String color, Shape tvar) {
+        this.objects.remove(objects);   // just in case it was already there
+        this.objects.add(objects);      // add at the end
+        this.tvary.put(objects, new Visualdescription(tvar, color));
         this.redraw();
     }
 
@@ -186,7 +185,7 @@ public class Poligon {
         try {
             Thread.sleep(milisekundy);
         } catch (Exception e) {
-            System.out.println("Cakanie sa nepodarilo");
+            System.out.println("Waiting was not completed yet");
         }
     }
 
@@ -195,7 +194,7 @@ public class Poligon {
      */
     private void redraw() {
         this.erase();
-        for (Object tvar : this.objekty ) {
+        for (Object tvar : this.objects ) {
             this.tvary.get(tvar).draw(this.graphic);
         }
         this.canvas.repaint();
@@ -206,7 +205,7 @@ public class Poligon {
      */
     private void erase() {
         Color original = this.graphic.getColor();
-        this.graphic.setColor(this.pozadie);
+        this.graphic.setColor(this.rectangle);
         Dimension size = this.canvas.getSize();
         this.graphic.fill(new Rectangle(0, 0, size.width, size.height));
         this.graphic.setColor(original);
@@ -241,18 +240,18 @@ public class Poligon {
      * Canvas frame. This is essentially a JPanel with added capability to
      * refresh the image drawn on it.
      */
-    private class PopisTvaru {
-        private Shape tvar;
-        private String farba;
+    private class VisualDescription {
+        private Shape visual;
+        private String color;
 
-        public PopisTvaru(Shape tvar, String farba) {
-            this.tvar = tvar;
-            this.farba = farba;
+        public VisualDescription(Shape visual, String color) {
+            this.visual = this.visual;
+            this.color = color;
         }
 
         public void draw(Graphics2D graphic) {
-            Poligon.this.setForegroundColor(this.farba);
-            graphic.fill(this.tvar);
+            Poligon.this.setForegroundColor(this.color);
+            graphic.fill(this.visual);
         }
     }
 }
