@@ -1,7 +1,7 @@
 import java.awt.Rectangle;
 
 /**
- * Rectangle with wich you can move and you can see it on the poligon.
+ * Rectangle with wich you can move, and you can see it on the poligon.
  *
  */
 

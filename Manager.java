@@ -77,11 +77,11 @@ public class Manager {
         this.removeDeletedObjects();
     }
     
-    private void posliSpravu(String selektor, int firstParameter, int secondParameter) {
+    private void sendCommand(String selector, int firstParameter, int secondParameter) {
         for (Object adresat : this.managedObjects) {
             try {
                 if (adresat != null) {
-                    Method command = adresat.getClass().getMethod(selektor, Integer.TYPE, Integer.TYPE);
+                    Method command = adresat.getClass().getMethod(selector, Integer.TYPE, Integer.TYPE);
                     command.invoke(adresat, firstParameter, secondParameter);
                 }
             } catch (SecurityException e) {
@@ -116,7 +116,7 @@ public class Manager {
     /**
      * Create new manager, if it doesn't exist.
      */
-    public Manager() {
+    public Manager(boolean ManagerKey, int ManagerCasovaca) {
         this.managedObjects= new ArrayList<Object>();
         this.deletedObjects = new ArrayList<Integer>();
         Poligon.getPoligon().addKeyListener(new ManagerKey());

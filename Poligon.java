@@ -24,7 +24,6 @@ import java.util.ArrayList;
  */
 
 
-
 public class Poligon {
     // Note: The implementation of this class (specifically the handling of
     // shape identity and colors) is slightly more complex than necessary. This
@@ -98,7 +97,7 @@ public class Poligon {
         this.canvas.setPreferredSize(new Dimension(width, height));
         this.timer = new javax.swing.Timer(25, null);
         this.timer.start();
-        this.backgroundR = background;
+        this.background = background;
         this.frame.pack();
         this.objects = new ArrayList<Object>();
         this.visual = new HashMap<Object, VisualDescription>();
@@ -134,26 +133,26 @@ public class Poligon {
     // Note: this is a slightly backwards way of maintaining the shape
     // objects. It is carefully designed to keep the visible shape interfaces
     // in this project clean and simple for educational purposes.
-    public void draw(Object objects, String color, Shape tvar) {
+    public void draw(Object objects, String color, Shape visual) {
         this.objects.remove(objects);   // just in case it was already there
         this.objects.add(objects);      // add at the end
-        this.tvary.put(objects, new Visualdescription(tvar, color));
+        this.visual.put(objects, new VisualDescription (tvar, color));
         this.redraw();
     }
 
     /**
      * Erase a given shape's from the screen.
-     * @param  referenceObject  the shape object to be erased
+     * @param  referenceObject the shape object to be erased
      */
-    public void erase(Object objekt) {
-        this.objekty.remove(objekt);   // just in case it was already there
-        this.tvary.remove(objekt);
+    public void erase(Object object) {
+        this.objects.remove(object);   // just in case it was already there
+        this.visual.remove(object);
         this.redraw();
     }
 
     /**
      * Set the foreground colour of the Canvas.
-     * @param  newColour   the new colour for the foreground of the Canvas
+     * @param  newColor   the new colour for the foreground of the Canvas
      */
     public void setForegroundColor(String farba) {
         if (farba.equals("red")) {
@@ -195,7 +194,7 @@ public class Poligon {
     private void redraw() {
         this.erase();
         for (Object tvar : this.objects ) {
-            this.tvary.get(tvar).draw(this.graphic);
+            this.visual.get(tvar).draw(this.graphic);
         }
         this.canvas.repaint();
     }
