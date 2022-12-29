@@ -28,7 +28,7 @@ public class CustomRectangle {
     /**
      * (Rectangle) Display.
      */
-    public void display() {
+    public void show() {
         this.isVisible = true;
         this.draw();
     }

@@ -2,6 +2,8 @@ public class GameDisplay {
     private int upperLimit;
     private int value;
 
+    private SegmentNumber
+
     public GameDisplay() {
         this.upperLimit = upperLimit;
         this.value = 0;
