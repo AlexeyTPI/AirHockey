@@ -2,6 +2,8 @@ public class GameDisplay {
     private int upperLimit;
     private int value;
 
+    private SegmentNumber 
+    private SegmentNumber
     private SegmentNumber
 
     public GameDisplay() {
