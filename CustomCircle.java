@@ -37,28 +37,28 @@
         /**
          * (CustomCircle) Shift right on the sertain distance.
          */
-        public void moveRight() {
+        public void shiftRight() {
             this.shiftVertically(20);
         }
 
         /**
          *  (CustomCircle) Shift left on the sertain distance.
          */
-        public void posunVlavo() {
+        public void moveLeft() {
             this.shiftVertically(-20);
         }
 
         /**
          *  (CustomCircle) Shift up on the sertain distance.
          */
-        public void posunHore() {
+        public void shiftUp() {
             this.moveHorizontally(-20);
         }
 
         /**
          *  (CustomCircle) Shift down on the sertain distance.
          */
-        public void posunDole() {
+        public void shiftDown() {
             this.shiftVertically(20);
         }
 
@@ -66,7 +66,7 @@
          * (CustomCircle) Shift horizontally on the sertain distance.
          */
         public void moveHorizontally (int distance) {
-            this.zmaz();
+            this.deleteCircle();
             this.leftTopX += distance;
             this.create();
         }
@@ -75,7 +75,7 @@
          * (CustomCircle) Shift vertically on the sertain distance.
          */
         public void shiftVertically (int distance) {
-            this.zmaz();
+            this.deleteCircle();
             this.leftTopY += distance;
             this.create();
         }
@@ -119,35 +119,33 @@
         }
 
         /**
-         * (Kruh) Zmeň priemer na hodnotu danú parametrom.
-         * Priemer musí byť nezáporné celé číslo.
+         * (CustomCircle) change the number by the given parameter.
+         * Number must be > 0;
          */
-        public void zmenPriemer(int priemer) {
-            this.zmaz();
-            this.avarage = priemer;
-            this.nakresli();
+        public void changeNumber(int number) {
+            this.deleteCircle();
+            this.avarage = number;
+            this.draw();
         }
 
         /**
-         * (Kruh) Zmeň farbu na hodnotu danú parametrom.
-         * Nazov farby musí byť po anglicky.
-         * Možné farby sú tieto:
-         * červená - "red"
-         * žltá    - "yellow"
-         * modrá   - "blue"
-         * zelená  - "green"
-         * fialová - "magenta"
-         * čierna  - "black"
+         * (Kruh) Change the color by such variants:
+         * - "red"
+         * - "yellow"
+         * - "blue"
+         * - "green"
+         * - "magenta"
+         * - "black"
          */
-        public void zmenFarbu(String farba) {
-            this.paint = farba;
-            this.nakresli();
+        public void changePaint(String paint) {
+            this.paint = paint;
+            this.draw();
         }
 
         /*
          * Draw the circle with current specifications on screen.
          */
-        private void nakresli() {
+        private void draw() {
             if (this.isVisible) {
                 Poligon canvas = Poligon.getPoligon();
                 canvas.draw(this, this.paint, new Ellipse2D.Double(this.leftTopX, this.leftTopY,
@@ -159,8 +157,7 @@
         /*
          * Erase the circle on screen.
          */
-        private void zmaz() {
-            https://auto.bazos.sk/inzerat/145828911/bmw-e46-330d-135kw-touring-topas-blau.php
+        private void deleteCircle() {
             if (this.isVisible) {
                 Poligon canvas = Poligon.getPoligon();
                 canvas.erase(this);

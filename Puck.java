@@ -28,7 +28,7 @@ public class Puck {
         this.moveY = sizeMoveY;
 
         this.circle = new CustomCircle();
-        this.circle.zmenFarbu("black");
+        this.circle.changeColor("black");
 
     }
 }

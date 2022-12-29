@@ -44,7 +44,7 @@ public class Manager {
         }
     }
     
-    private class ManagerM implements ActionListener {
+    private class ManagerTimer implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             long newTick = System.nanoTime();
             if (newTick - Manager.this.oldTick >= Manager.TICK_LENGTH || newTick < Manager.TICK_LENGTH) {
@@ -116,11 +116,11 @@ public class Manager {
     /**
      * Create new manager, if it doesn't exist.
      */
-    public Manager(boolean ManagerKey, int ManagerCasovaca) {
+    public Manager(boolean ManagerButton, int ManagerM) {
         this.managedObjects= new ArrayList<Object>();
         this.deletedObjects = new ArrayList<Integer>();
-        Poligon.getPoligon().addKeyListener(new ManagerKey());
-        Poligon.getPoligon().addTimerListener(new ManagerCasovaca());
+        Poligon.getPoligon().addKeyListener(new ManagerButton());
+        Poligon.getPoligon().addTimerListener(new ManagerTimer());
         Poligon.getPoligon().addMouseListener(new ManagerHasTo());
     }
     
