@@ -119,9 +119,9 @@ public class Manager {
     public Manager(boolean ManagerButton, int ManagerM) {
         this.managedObjects= new ArrayList<Object>();
         this.deletedObjects = new ArrayList<Integer>();
-        Poligon.getPoligon().addKeyListener(new ManagerButton());
-        Poligon.getPoligon().addTimerListener(new ManagerTimer());
-        Poligon.getPoligon().addMouseListener(new ManagerHasTo());
+        Polygon.getPolygon().addKeyListener(new ManagerButton());
+        Polygon.getPolygon().addTimerListener(new ManagerTimer());
+        Polygon.getPolygon().addMouseListener(new ManagerHasTo());
     }
     
     /**

@@ -11,10 +11,8 @@ public class Puck {
     private CustomCircle circle;
     private int positionX;
     private int positionY;
-
     private int sizeMoveX = 10;
     private int sizeMoveY = 10;
-
     private int moveX;
     private int moveY;
     public int a = 0;
@@ -28,7 +26,6 @@ public class Puck {
         this.moveY = sizeMoveY;
 
         this.circle = new CustomCircle();
-        this.circle.changeColor("black");
-
+        this.circle.changePaint("black");
     }
 }

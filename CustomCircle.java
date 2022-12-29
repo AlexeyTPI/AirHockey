@@ -147,7 +147,7 @@ public class CustomCircle {
      */
     private void draw() {
         if (this.isVisible) {
-            Poligon canvas = Poligon.getPoligon();
+            Polygon canvas = Polygon.getPolygon();
             canvas.draw(this, this.paint, new Ellipse2D.Double(this.leftTopX, this.leftTopY,
                     this.average, this.average));
             canvas.wait(10);
@@ -159,7 +159,7 @@ public class CustomCircle {
      */
     private void deleteCircle() {
         if (this.isVisible) {
-            Poligon canvas = Poligon.getPoligon();
+            Polygon canvas = Polygon.getPolygon();
             canvas.erase(this);
         }
     }

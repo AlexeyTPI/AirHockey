@@ -158,7 +158,7 @@ public class CustomRectangle {
      */
     private void draw() {
         if (this.isVisible) {
-            Poligon canvas = Poligon.getPoligon();
+            Polygon canvas = Polygon.getPolygon();
             canvas.draw(this, this.color,
                     new Rectangle(this.leftTopX, this.leftTopY, this.sideA, this.sideB));
             canvas.wait(10);
@@ -170,7 +170,7 @@ public class CustomRectangle {
      */
     private void delete() {
         if (this.isVisible) {
-            Poligon canvas = Poligon.getPoligon();
+            Polygon canvas = Polygon.getPolygon();
             canvas.erase(this);
         }
     }

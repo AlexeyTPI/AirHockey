@@ -14,110 +14,83 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Canvas is a class to allow for simple graphical drawing on a canvas.
  * This is a modification of the general purpose Canvas, specially made for
  * the BlueJ "shapes" example.
- *
- *
  */
 
+public class Polygon {
 
-public class Poligon {
-    // Note: The implementation of this class (specifically the handling of
-    // shape identity and colors) is slightly more complex than necessary. This
-    // is done on purpose to keep the interface and instance fields of the
-    // shape objects in this project clean and simple for educational purposes.
-
-    private static Poligon poligonSingleton;
-    public static int widthPoligon = 300;
-    public static int heightPoligon = 400;
-    private static Rectangle background;
-
-
-
-
-
-
-
-
-
-
+    private static Polygon polygonSingleton;
+    public static int widthPolygon = 300;
+    public static int heightPolygon = 400;
+    private static CustomRectangle background;
+    private JFrame frame;
+    private CanvasPane canvas;
+    private Graphics2D graphic;
+    private Color backgroundColor;
+    private Image canvasImage;
+    private Timer timer;
+    private List<Object> objects;
+    private Map<Object, VisualDescription> visual;
 
     /**
      * Factory method to get the canvas singleton object.
      */
-    public static Poligon getPoligon() {
-
-        if (Poligon.poligonSingleton == null) {
-            Poligon.poligonSingleton = new Poligon("BlueJ Shapes Demo", widthPoligon, heightPoligon,
+    public static Polygon getPolygon() {
+        if (Polygon.polygonSingleton == null) {
+            Polygon.polygonSingleton = new Polygon("BlueJ Shapes Demo", widthPolygon, heightPolygon,
                     Color.white);
-            background = new Rectangle();
-            background.
+            background = new CustomRectangle();
             background.changeColor("blue");
-            background.changeSides(widthPoligon, heightPoligon - 100);
+            background.changeSide(widthPolygon, heightPolygon - 100);
             background.moveHorizontal(-60);
             background.moveVertical(-50);
-            background.display();
-
-
-
-
-
-
+            background.show();
         }
-        Poligon.poligonSingleton.setVisible(true);
-        return Poligon.poligonSingleton;
+        Polygon.polygonSingleton.setVisible(true);
+        return Polygon.polygonSingleton;
     }
-
-    //  ----- instance part -----
-
-    private JFrame frame;
-    private CanvasPane canvas;
-    private Graphics2D graphic;
-    private Color background;
-    private Image canvasImage;
-    private Timer timer;
-    private List<Object> objects;
-    private HashMap<Object, Visualdescription> visual;
 
     /**
      * Create a Canvas.
-     * @param title  title to appear in Canvas Frame
-     * @param width  the desired width for the canvas
-     * @param height  the desired height for the canvas
-     * @param bgColor  the desired background colour of the canvas
+     *
+     * @param title           title to appear in Canvas Frame
+     * @param width           the desired width for the canvas
+     * @param height          the desired height for the canvas
+     * @param backgroundColor the desired background colour of the canvas
      */
-    private Poligon(String Ntitle, int width, int height, Color background) {
+    private Polygon(String title, int width, int height, Color backgroundColor) {
         this.frame = new JFrame();
         this.canvas = new CanvasPane();
         this.frame.setContentPane(this.canvas);
-        this.frame.setTitle(Ntitle);
+        this.frame.setTitle(title);
         this.canvas.setPreferredSize(new Dimension(width, height));
         this.timer = new javax.swing.Timer(25, null);
         this.timer.start();
-        this.background = background;
+        this.backgroundColor = backgroundColor;
         this.frame.pack();
-        this.objects = new ArrayList<Object>();
-        this.visual = new HashMap<Object, VisualDescription>();
+        this.objects = new ArrayList<>();
+        this.visual = new HashMap<>();
     }
 
     /**
      * Set the canvas visibility and brings canvas to the front of screen
      * when made visible. This method can also be used to bring an already
      * visible canvas to the front of other windows.
-     * @param visible  boolean value representing the desired visibility of
-     * the canvas (true or false)
+     *
+     * @param visible boolean value representing the desired visibility of
+     *                the canvas (true or false)
      */
     public void setVisible(boolean visible) {
         if (this.graphic == null) {
-            // first time: instantiate the offscreen image and fill it with
-            // the background colour
             Dimension size = this.canvas.getSize();
             this.canvasImage = this.canvas.createImage(size.width, size.height);
-            this.graphic = (Graphics2D)this.canvasImage.getGraphics();
-            this.graphic.setColor(this.background);
+            this.graphic = (Graphics2D) this.canvasImage.getGraphics();
+            this.graphic.setColor(this.backgroundColor);
             this.graphic.fillRect(0, 0, size.width, size.height);
             this.graphic.setColor(Color.black);
         }
@@ -126,51 +99,43 @@ public class Poligon {
 
     /**
      * Draw a given shape onto the canvas.
-     * @param  referenceObject  an object to define identity for this shape
-     * @param  color            the color of the shape
-     * @param  shape            the shape object to be drawn on the canvas
+     *
+     * @param objects an object to define identity for this shape
+     * @param color   the color of the shape
+     * @param shape   the shape object to be drawn on the canvas
      */
-    // Note: this is a slightly backwards way of maintaining the shape
-    // objects. It is carefully designed to keep the visible shape interfaces
-    // in this project clean and simple for educational purposes.
-    public void draw(Object objects, String color, Shape visual) {
-        this.objects.remove(objects);   // just in case it was already there
-        this.objects.add(objects);      // add at the end
-        this.visual.put(objects, new VisualDescription (tvar, color));
+    public void draw(Object objects, String color, Shape shape) {
+        this.objects.remove(objects);
+        this.objects.add(objects);
+        this.visual.put(objects, new VisualDescription(shape, color));
         this.redraw();
     }
 
     /**
      * Erase a given shape's from the screen.
-     * @param  referenceObject the shape object to be erased
+     *
+     * @param object the shape object to be erased
      */
     public void erase(Object object) {
-        this.objects.remove(object);   // just in case it was already there
+        this.objects.remove(object);
         this.visual.remove(object);
         this.redraw();
     }
 
     /**
      * Set the foreground colour of the Canvas.
-     * @param  newColor   the new colour for the foreground of the Canvas
+     *
+     * @param newColor the new colour for the foreground of the Canvas
      */
-    public void setForegroundColor(String farba) {
-        if (farba.equals("red")) {
-            this.graphic.setColor(Color.red);
-        } else if (farba.equals("black")) {
-            this.graphic.setColor(Color.black);
-        } else if (farba.equals("blue")) {
-            this.graphic.setColor(Color.blue);
-        } else if (farba.equals("yellow")) {
-            this.graphic.setColor(Color.yellow);
-        } else if (farba.equals("green")) {
-            this.graphic.setColor(Color.green);
-        } else if (farba.equals("magenta")) {
-            this.graphic.setColor(Color.magenta);
-        } else if (farba.equals("white")) {
-            this.graphic.setColor(Color.white);
-        } else {
-            this.graphic.setColor(Color.black);
+    public void setForegroundColor(String newColor) {
+        switch (newColor) {
+            case "red" -> this.graphic.setColor(Color.red);
+            case "blue" -> this.graphic.setColor(Color.blue);
+            case "yellow" -> this.graphic.setColor(Color.yellow);
+            case "green" -> this.graphic.setColor(Color.green);
+            case "magenta" -> this.graphic.setColor(Color.magenta);
+            case "white" -> this.graphic.setColor(Color.white);
+            default -> this.graphic.setColor(Color.black);
         }
     }
 
@@ -178,11 +143,12 @@ public class Poligon {
      * Wait for a specified number of milliseconds before finishing.
      * This provides an easy way to specify a small delay which can be
      * used when producing animations.
-     * @param  milliseconds  the number
+     *
+     * @param milliseconds the number
      */
-    public void wait(int milisekundy) {
+    public void wait(int milliseconds) {
         try {
-            Thread.sleep(milisekundy);
+            Thread.sleep(milliseconds);
         } catch (Exception e) {
             System.out.println("Waiting was not completed yet");
         }
@@ -193,8 +159,8 @@ public class Poligon {
      */
     private void redraw() {
         this.erase();
-        for (Object tvar : this.objects ) {
-            this.visual.get(tvar).draw(this.graphic);
+        for (Object shape : this.objects) {
+            this.visual.get(shape).draw(this.graphic);
         }
         this.canvas.repaint();
     }
@@ -204,7 +170,7 @@ public class Poligon {
      */
     private void erase() {
         Color original = this.graphic.getColor();
-        this.graphic.setColor(this.rectangle);
+        this.graphic.setColor(this.backgroundColor);
         Dimension size = this.canvas.getSize();
         this.graphic.fill(new Rectangle(0, 0, size.width, size.height));
         this.graphic.setColor(original);
@@ -230,7 +196,7 @@ public class Poligon {
      */
     private class CanvasPane extends JPanel {
         public void paint(Graphics graphic) {
-            graphic.drawImage(Poligon.this.canvasImage, 0, 0, null);
+            graphic.drawImage(Polygon.this.canvasImage, 0, 0, null);
         }
     }
 
@@ -244,12 +210,12 @@ public class Poligon {
         private String color;
 
         public VisualDescription(Shape visual, String color) {
-            this.visual = this.visual;
+            this.visual = visual;
             this.color = color;
         }
 
         public void draw(Graphics2D graphic) {
-            Poligon.this.setForegroundColor(this.color);
+            Polygon.this.setForegroundColor(this.color);
             graphic.fill(this.visual);
         }
     }
