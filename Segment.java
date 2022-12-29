@@ -1,22 +1,21 @@
-import java.awt.*;
 
 public class Segment {
-    private  CustomRectangle;
+    private CustomRectangle customRectangle;
+
     public Segment(int width, int height, int x, int y) {
-        this.rectangle = new Rectangle();
-        this.rectangle.changeSide(width, height);
-        this.rectangle.shiftHorizontal(x);
-        this.rectangle.shiftVertically(y);
-        this.rectangle.create();
+        this.customRectangle = new CustomRectangle();
+        this.customRectangle.changeSide(width, height);
+        this.customRectangle.moveHorizontal(x);
+        this.customRectangle.moveVertical(y);
+        this.customRectangle.show();
     }
 
-    public void zapni() {
-        this.rectangle.create();
+    public void turnOn() {
+        this.customRectangle.show();
     }
 
-    public void vypni() {
-        this.rectangle.disappear();
-
+    public void turnOff() {
+        this.customRectangle.hide();
     }
 }
 
