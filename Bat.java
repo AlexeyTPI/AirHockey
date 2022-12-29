@@ -4,88 +4,67 @@ public class Bat {
     /**
      * Constructor for objects of class Bat
      */
-            private Rectangle rectangle;
-            private int positionY;
+    private CustomRectangle rectangle;
+    private int positionY;
 
+    public Bat(boolean isRight) {
+        this.positionY = Poligon.heightPoligon / 2;
+        this.rectangle = new CustomRectangle();
+        this.rectangle.changeColor("black");
+        this.rectangle.changeSide(10, 50);
+        this.rectangle.moveVertical(Poligon.heightPoligon / 2 - 25 - 50 - 50);
+        if (isRight) {
+            this.rectangle.moveHorizontal(Poligon.widthPoligon - 10 - 60);
 
-    public Bat() {
-        // initialise instance variables
-                this.positionY = Poligon.heightPoligon / 2;
-                this.rectangle = new Rectangle;
-                this.rectangle.changeColour("black");
-                this.rectangle.changeSide(10 , 50);
-                this.rectangle.shiftVertical(Poligon.heightPoligon / 2 - 25 - 50 - 50);
-                if (isRight) {
-                    this.rectangle.shiftHorizontal(Poligon.widthPoligon - 10 - 60);
-
-                } else {
-                    this.rectangle.shiftHorizontal(-60);
-                }
-                this.rectangle.create();
-            }
-
-            public void posunHore() {
-
-                if (this.positionY > 25 + 50) {
-                    this.rectangle.moveVertical(-5);
-                    this.positionY -= 5;
-
-                }
-            }
-
-            public void posunDole() {
-                if (this.positionY < Poligon.heightPoligon - 100 - 25 + 50) {
-                    this.rectangle.moveVertical(5);
-                    this.positionY += 5;
-                }
-            }
-
-            public boolean koliduje(int x, int y) {
-
-                if (x <= 10 || x >= Poligon.widthPoligon - 10) {
-                    if (y <= this.positionY + 20 - 50 &&  y >= this.positionY + 3 - 50 || this.positionY - 20 - 50 <= y && this.positionY - 3 - 50 >= y) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            public boolean kolidujeNaStranach(int x, int y) {
-
-                if (x <= 10 || x >= Poligon.widthPoligon - 10) {
-                    if ( y >= this.positionY - 25 - 50 && y <= this.positionY - 21 - 50  || y <= this.positionY + 25 - 50 &&  y >= this.positionY + 21 - 50) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-
-            public boolean kolidujeVstrede(int x, int y) {
-
-                if (x <= 10 || x >= Poligon.widthPoligon - 10) {
-                    if (this.positionY - 3 - 50 <= y && y <= this.positionY + 3 - 50) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            public boolean kolidujeNaBokoch(int x, int y) {
-
-                if (x <= 10 && x > 0 || x > Poligon.widthPoligon- 10 && x <= Poligon.widthPoligon) {
-                    if ( y == this.positionY + 25 - 50 || y == this.positionY - 25 - 50) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-
-
-
+        } else {
+            this.rectangle.moveHorizontal(-60);
         }
+        this.rectangle.show();
+    }
+
+    public void moveUp() {
+        if (this.positionY > 25 + 50) {
+            this.rectangle.moveVertical(-5);
+            this.positionY -= 5;
+        }
+    }
+
+    public void moveDown() {
+        if (this.positionY < Poligon.heightPoligon - 100 - 25 + 50) {
+            this.rectangle.moveVertical(5);
+            this.positionY += 5;
+        }
+    }
+
+    public boolean hit(int x, int y) {
+        if (x <= 10 || x >= Poligon.widthPoligon - 10) {
+            return y <= this.positionY + 20 - 50 && y >= this.positionY + 3 - 50
+                    || this.positionY - 20 - 50 <= y && this.positionY - 3 - 50 >= y;
+        }
+        return false;
+    }
+
+    public boolean hitSide(int x, int y) {
+        if (x <= 10 || x >= Poligon.widthPoligon - 10) {
+            return y >= this.positionY - 25 - 50 && y <= this.positionY - 21 - 50
+                    || y <= this.positionY + 25 - 50 && y >= this.positionY + 21 - 50;
+        }
+        return false;
+    }
+
+
+    public boolean hitCenter(int x, int y) {
+        if (x <= 10 || x >= Poligon.widthPoligon - 10) {
+            return this.positionY - 3 - 50 <= y && y <= this.positionY + 3 - 50;
+        }
+        return false;
+    }
+
+    public boolean hitFlank(int x, int y) {
+        if (x <= 10 && x > 0 || x > Poligon.widthPoligon - 10 && x <= Poligon.widthPoligon) {
+            return y == this.positionY + 25 - 50 || y == this.positionY - 25 - 50;
+        }
+        return false;
+    }
+
+}
