@@ -12,7 +12,7 @@ public class Bat {
         // initialise instance variables
                 this.positionY = Poligon.heightPoligon / 2;
                 this.rectangle = new Rectangle;
-                this.rectangle.changeColur("black");
+                this.rectangle.changeColour("black");
                 this.rectangle.changeSide(10 , 50);
                 this.rectangle.shiftVertical(Poligon.heightPoligon / 2 - 25 - 50 - 50);
                 if (isRight) {
