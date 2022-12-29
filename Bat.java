@@ -14,12 +14,12 @@ public class Bat {
                 this.rectangle = new Rectangle;
                 this.rectangle.changeColur("black");
                 this.rectangle.changeSide(10 , 50);
-                this.rectangle.moveVertical(Poligon.heightPoligon / 2 - 25 - 50 - 50);
+                this.rectangle.shiftVertical(Poligon.heightPoligon / 2 - 25 - 50 - 50);
                 if (isRight) {
-                    this.rectangle.moveHorizontal(Poligon.widthPoligon - 10 - 60);
+                    this.rectangle.shiftHorizontal(Poligon.widthPoligon - 10 - 60);
 
                 } else {
-                    this.rectangle.moveHorizontal(-60);
+                    this.rectangle.shiftHorizontal(-60);
                 }
                 this.rectangle.create();
             }
