@@ -1,5 +1,4 @@
 
-
 /**
  * Trieda reprezentujuca jeden ciselny displej v digitalnych hodinach.
  * Stara sa o zmenu hodnoty v zadanych hraniciach a o formatovanie

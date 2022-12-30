@@ -1,5 +1,4 @@
 
-
 public class Bat {
     /**
      * Constructor for objects of class Bat
