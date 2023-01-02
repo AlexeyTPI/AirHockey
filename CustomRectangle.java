@@ -4,7 +4,6 @@ import java.awt.Rectangle;
  * Rectangle with wich you can move, and you can see it on the polygon.
  *
  */
-
 public class CustomRectangle {
     private int sideA;
     private int sideB;
