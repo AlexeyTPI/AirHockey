@@ -1,5 +1,13 @@
 import java.awt.geom.Ellipse2D;
 
+/**
+ * A circle that can be moved and drawn on the canvas.
+ *
+ * @author  Michael Kolling and David J. Barnes
+ * @version 1.0  (15 July 2000)
+ */
+
+
 public class CustomCircle {
     private int average;
     private int leftTopX;
@@ -23,15 +31,15 @@ public class CustomCircle {
      */
     public void show() {
         this.isVisible = true;
-        this.show();
+        this.draw();
     }
 
     /**
      * (CustomCircle) delete yourself.
      */
     public void hide() {
-        this.hide();
         this.isVisible = false;
+        this.deleteCircle();
     }
 
     /**

@@ -1,3 +1,4 @@
+import java.awt.geom.Ellipse2D;
 
 /**
  * Write a description of class Puck here.
@@ -7,8 +8,6 @@
  */
 public class Puck {
     private static final int RADIUS = 10;
-    private Bat bat;
-    private AirHockey airHockey;
     private CustomCircle circle;
     private int positionX;
     private int positionY;
@@ -20,7 +19,7 @@ public class Puck {
     public int b = 0;
 
     /**
-     * Posuny( pozícia - POLOMER - povodnaPoziciaKruhu)
+     * Offsets: position - RADIUS - floodPositionCircle
      */
     public Puck() {
         this.positionX = Polygon.widthPolygon / 2;

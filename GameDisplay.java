@@ -1,25 +1,28 @@
 
 
+
 /**
- * Trieda reprezentujuca jeden ciselny displej v digitalnych hodinach.
- * Stara sa o zmenu hodnoty v zadanych hraniciach a o formatovanie
- * cisla do tvaru dvojcifernej hodnoty.
+ * Class represents one numeric display in a digital clock.
+ * Takes care of changing the value within the specified limits and formatting
+ * a number into a two-digit value.
  */
 public class GameDisplay {
-    private int upperLimit;
+    private final int upperLimit;
     private int value;
 
-    private SegmentNumber tenth;
-    private SegmentNumber one;
-    private SegmentNumber hundreds;
+    private final SegmentNumber tenth;
+    private final SegmentNumber one;
+    private final SegmentNumber hundreds;
 
 
     /**
-     * Inicializuje ciselny displej na hodnotu 0. Horna hranica sa pouzije
-     * ta, co zada pouzivatel v parametri.
+     * Initializes the numeric display to 0. The upper limit is used
+     * the one entered by the user in the parameter.
      *
-     * @param upperLimit Predstavuje cislo, ktore hodnota ciselneho
-     *                   displeja nemoze dosiahnut.
+     * @param upperLimit Represents the number that the value of the numeric
+     * @param x Represents the way by X;
+     * @param y Represents the way by Y;
+     * cannot reach the display.
      */
     public GameDisplay(int upperLimit, int x, int y) {
         this.upperLimit = upperLimit;
@@ -31,20 +34,11 @@ public class GameDisplay {
 
 
     /**
-     * Vrati aktualnu hodnotu ciselneho displeja vo forme celeho cisla typu
-     * int.
-     */
-    public int getValue() {
-        return this.value;
-    }
-
-
-    /**
-     * Nastavi novu hodnotu ciselneho displeja vo forme celeho cisla typu int.
-     * Kontroluje platnost zadavaneho cisla. V pripade, ze je mimo rozsah,
-     * nechava povodnu hodnotu.
+     * Sets the new value of the numeric display in the form of an integer of type int.
+     * Checks the validity of the entered number. If it is out of range,
+     * leaves the flood value.
      *
-     * @param value hodnota, ktora sa ma nastavit.
+     * @param value to be set.
      */
     public void setValue(int value) {
         if (value >= 0) {
@@ -56,35 +50,4 @@ public class GameDisplay {
             }
         }
     }
-
-    /**
-     * Vrati hodnotu ciselneho displeja vo forme retazca, pricom hodnota je
-     * vzdy vo forme dvojciferneho cisla s pripadnou uvodnou nulou.
-     */
-    public String getValueSeverally() {
-        if (this.value < 10) {
-            return "0" + this.value;
-        } else {
-            return "" + this.value;
-        }
-    }
-
-    /**
-     * Zvacsi hodnotu na ciselnom displeji o hodnotu jedna. Ak dosiahne hornu
-     * hranicu, pokracuje znovu od nuly.
-     */
-    public void step() {
-        this.value = (this.value + 1)
-                % this.upperLimit;
-        this.hundreds.setValue(this.value / 10);
-        this.tenth.setValue(this.value % 10);
-        this.one.setValue(this.value % 10);
-
-    }
-
-    public int changeMaximum(int max) {
-        this.upperLimit = max;
-        return this.upperLimit;
-    }
-
 }

@@ -1,7 +1,7 @@
 import java.awt.Rectangle;
 
 /**
- * Rectangle with wich you can move, and you can see it on the poligon.
+ * Rectangle with wich you can move, and you can see it on the polygon.
  *
  */
 
@@ -42,35 +42,11 @@ public class CustomRectangle {
     }
 
     /**
-     * (Rectangle) Move right on the sertain distance.
+     * (Rectangle) Move UP on the certain distance.
      */
-    public void moveRight() {
-        this.moveHorizontal(20);
-    }
 
     /**
-     * (Rectangle) Move left on the sertain distance.
-     */
-    public void moveLeft() {
-        this.moveHorizontal(-20);
-    }
-
-    /**
-     * (Rectangle) Move UP on the sertain distance.
-     */
-    public void shiftUp() {
-        this.moveVertical(-20);
-    }
-
-    /**
-     * (Rectangle) Move DOWN on the sertain distance.
-     */
-    public void shiftDown() {
-        this.moveVertical(20);
-    }
-
-    /**
-     * (Rectangle) Move Horizontal on the sertain distance.
+     * (Rectangle) Move Horizontal on the certain distance.
      */
     public void moveHorizontal(int distance) {
         this.delete();
@@ -90,40 +66,7 @@ public class CustomRectangle {
     /**
      * (Rectangle) Move slowly Horizontally according to the parameter.
      */
-    public void moveSlowlyHoriizontally(int distance) {
-        int delta;
 
-        if (distance < 0) {
-            delta = -1;
-            distance = -distance;
-        } else  {
-            delta = 1;
-        }
-
-        for (int i = 0; i < distance; i++) {
-            this.leftTopX += delta;
-            this.draw();
-        }
-    }
-
-    /**
-     * (Rectangle) Move slowly Vertically according to the parameter.
-     */
-    public void moveSlowlyVertically(int distance) {
-        int delta;
-
-        if (distance < 0) {
-            delta = -1;
-            distance = -distance;
-        } else {
-            delta = 1;
-        }
-
-        for (int i = 0; i < distance; i++) {
-            this.leftTopY += delta;
-            this.draw();
-        }
-    }
 
     /**
      * (Rectangle) Change side sizes on these parametres.
