@@ -1,14 +1,12 @@
 import java.awt.geom.Ellipse2D;
 
 /**
- * Write a description of class Puck here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * This is a ball with which two players interact.
  */
 public class Puck {
     private static final int RADIUS = 10;
-    private CustomCircle circle;
+    private final CustomCircle circle;
     private int positionX;
     private int positionY;
     private int sizeMoveX = 10;
@@ -32,7 +30,7 @@ public class Puck {
         this.circle.changePaint("red");
         this.circle.changeNumber(RADIUS * 2);
         this.circle.moveHorizontally(this.positionX - RADIUS - 20);
-        this.circle.moveVertically(this.positionY - RADIUS - 60);
+        this.circle.moveVertically(this.positionY - RADIUS - 50);
         this.circle.show();
     }
 
@@ -44,7 +42,8 @@ public class Puck {
 
 
     public void move(Bat batLeft, Bat batRight) {
-        if (batLeft.hitFlank(this.positionX - RADIUS, this.positionY)) {
+        if (batLeft.hitFlank(this.positionX - RADIUS, this.positionY) ||
+                batLeft.hitSide(this.positionX - RADIUS, this.positionY)) {
             if (this.positionX < Polygon.widthPolygon / 2) {
                 this.moveX = -this.moveX / 3;
                 if (this.moveY > 0) {
@@ -55,6 +54,12 @@ public class Puck {
             }
         }
 
+        if (batLeft.hitCenter(this.positionX - RADIUS, this.positionY)) {
+            if (this.positionX < Polygon.widthPolygon / 2) {
+                this.moveX = -this.moveX;
+                this.moveY = 0;
+            }
+        }
         if (batLeft.hitSide(this.positionX - RADIUS, this.positionY)) {
             if (this.positionX < Polygon.widthPolygon / 2) {
                 this.moveX = -this.moveX / 3;
@@ -84,8 +89,19 @@ public class Puck {
             }
         }
 
+        if (batLeft.hit(this.positionX - RADIUS, this.positionY)) {
+            if (this.positionX < Polygon.widthPolygon / 2) {
+                this.moveX = -this.moveX;
+                if (this.moveY > 0) {
+                    this.moveY = this.sizeMoveY;
+                } else {
+                    this.moveY = -this.sizeMoveY;
+                }
+            }
+        }
 
-        if (batRight.hitFlank(this.positionX + RADIUS, this.positionY)) {
+        if (batRight.hitFlank(this.positionX + RADIUS, this.positionY) ||
+                batRight.hitSide(this.positionX + RADIUS, this.positionY)) {
             if (this.positionX > Polygon.widthPolygon / 2) {
                 this.moveX = -this.moveX / 3;
                 if (this.moveY > 0) {
@@ -96,20 +112,6 @@ public class Puck {
                 }
             }
         }
-
-        if (batRight.hitSide(this.positionX + RADIUS, this.positionY)) {
-            if (this.positionX > Polygon.widthPolygon / 2) {
-                this.moveX = -this.moveX / 3;
-
-                if (this.moveY > 0) {
-                    this.moveY = this.sizeMoveY * 2;
-
-                } else {
-                    this.moveY = -this.sizeMoveY * 2;
-                }
-            }
-        }
-
         if (batRight.hitCenter(this.positionX + RADIUS, this.positionY)) {
             if (this.positionX > Polygon.widthPolygon / 2) {
                 this.moveX = -this.moveX;
@@ -128,7 +130,6 @@ public class Puck {
                 }
             }
         }
-
         if (this.positionX - RADIUS >= Polygon.widthPolygon) {
             this.a++;
             this.reset();
@@ -146,6 +147,13 @@ public class Puck {
         if (this.positionY - RADIUS <= 0) {
             this.moveY = this.moveY * -1;
         }
+
+        this.positionX += this.moveX;
+        this.positionY += this.moveY;
+
+
+        this.circle.moveHorizontally(this.moveX);
+        this.circle.moveVertically(this.moveY);
 
         this.positionX += this.moveX;
         this.positionY += this.moveY;

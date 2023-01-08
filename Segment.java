@@ -1,6 +1,6 @@
 
 public class Segment {
-    private CustomRectangle customRectangle;
+    private final CustomRectangle customRectangle;
 
     public Segment(int width, int height, int x, int y) {
         this.customRectangle = new CustomRectangle();

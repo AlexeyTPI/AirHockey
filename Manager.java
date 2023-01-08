@@ -26,13 +26,13 @@ public class Manager {
 
     private class ManagerButton extends KeyAdapter {
         public void keyPressed(KeyEvent event) {
-            if (event.getKeyCode() == KeyEvent.VK_DOWN) {
+            if (event.getKeyCode() == KeyEvent.VK_S) {
                 Manager.this.sendCommand("moveDown");
-            } else if (event.getKeyCode() == KeyEvent.VK_UP) {
+            } else if (event.getKeyCode() == KeyEvent.VK_W) {
                 Manager.this.sendCommand("moveUp");
-            } else if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+            } else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
                 Manager.this.sendCommand("moveLeft");
-            } else if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
+            } else if (event.getKeyCode() == KeyEvent.VK_UP) {
                 Manager.this.sendCommand("moveRight");
             } else if (event.getKeyCode() == KeyEvent.VK_SPACE || event.getKeyCode() == KeyEvent.VK_ENTER) {
                 Manager.this.sendCommand("activate(");

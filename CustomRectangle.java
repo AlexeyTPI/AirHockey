@@ -1,7 +1,7 @@
 import java.awt.Rectangle;
 
 /**
- * Rectangle with wich you can move, and you can see it on the polygon.
+ * Rectangle with which you can move, and you can see it on the polygon.
  *
  */
 public class CustomRectangle {
@@ -13,14 +13,14 @@ public class CustomRectangle {
     private boolean isVisible;
 
     /**
-     * Creates new rectangle with the pre-definitioned color on the pre-definitioned position.
+     * Creates new rectangle with the pre-definition color on the pre-definition position.
      */
     public CustomRectangle() {
         this.sideA = 30;
         this.sideB = 60;
         this.leftTopX = 60;
         this.leftTopY = 50;
-        this.color = "red";
+        this.color = "black";
         this.isVisible = false;
     }
 
@@ -68,7 +68,7 @@ public class CustomRectangle {
 
 
     /**
-     * (Rectangle) Change side sizes on these parametres.
+     * (Rectangle) Change side sizes on these parameters.
      * The side size must be > 0
      */
     public void changeSide(int sideA, int sideB) {
@@ -95,7 +95,7 @@ public class CustomRectangle {
         this.draw();
     }
 
-    /*
+    /**
      * Draw the square with current specifications on screen.
      */
     private void draw() {
@@ -107,7 +107,7 @@ public class CustomRectangle {
         }
     }
 
-    /*
+    /**
      * Erase the square on screen.
      */
     private void delete() {

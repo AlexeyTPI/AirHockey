@@ -1,13 +1,5 @@
 import java.awt.geom.Ellipse2D;
 
-/**
- * A circle that can be moved and drawn on the canvas.
- *
- * @author  Michael Kolling and David J. Barnes
- * @version 1.0  (15 July 2000)
- */
-
-
 public class CustomCircle {
     private int average;
     private int leftTopX;
@@ -42,33 +34,6 @@ public class CustomCircle {
         this.deleteCircle();
     }
 
-    /**
-     * (CustomCircle) Shift right on the certain distance.
-     */
-    public void moveRight() {
-        this.moveVertically(20);
-    }
-
-    /**
-     * (CustomCircle) Shift left on the certain distance.
-     */
-    public void moveLeft() {
-        this.moveVertically(-20);
-    }
-
-    /**
-     * (CustomCircle) Shift up on the certain distance.
-     */
-    public void moveUp() {
-        this.moveHorizontally(-20);
-    }
-
-    /**
-     * (CustomCircle) Shift down on the certain distance.
-     */
-    public void moveDown() {
-        this.moveVertically(20);
-    }
 
     /**
      * (CustomCircle) Shift horizontally on the certain distance.
@@ -86,44 +51,6 @@ public class CustomCircle {
         this.deleteCircle();
         this.leftTopY += distance;
         this.show();
-    }
-
-    /**
-     * (CustomCircle) Shift slowly horizontally by the length given by the parameter.
-     */
-    public void slowlyMoveHorizontal(int distance) {
-        int delta;
-
-        if (distance < 0) {
-            delta = -1;
-            distance = -distance;
-        } else {
-            delta = 1;
-        }
-
-        for (int i = 0; i < distance; i++) {
-            this.leftTopX += delta;
-            this.show();
-        }
-    }
-
-    /**
-     * (CustomCircle) Move slowly vertically by the length given by the parameter.
-     */
-    public void slowlyMoveVertically(int distance) {
-        int delta;
-
-        if (distance < 0) {
-            delta = -1;
-            distance = -distance;
-        } else {
-            delta = 1;
-        }
-
-        for (int i = 0; i < distance; i++) {
-            this.leftTopY += delta;
-            this.show();
-        }
     }
 
     /**

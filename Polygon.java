@@ -28,17 +28,18 @@ public class Polygon {
     public static int widthPolygon = 300;
     public static int heightPolygon = 400;
     private static CustomRectangle background;
-    private JFrame frame;
-    private CanvasPane canvas;
+    private final JFrame frame;
+    private final CanvasPane canvas;
     private Graphics2D graphic;
-    private Color backgroundColor;
+    private final Color backgroundColor;
     private Image canvasImage;
-    private Timer timer;
-    private List<Object> objects;
-    private Map<Object, VisualDescription> visual;
+    private final Timer timer;
+    private final List<Object> objects;
+    private final Map<Object, VisualDescription> visual;
 
     /**
      * Factory method to get the canvas singleton object.
+     * @return object of type Polygon.
      */
     public static Polygon getPolygon() {
         if (Polygon.polygonSingleton == null) {
@@ -69,7 +70,7 @@ public class Polygon {
         this.frame.setContentPane(this.canvas);
         this.frame.setTitle(title);
         this.canvas.setPreferredSize(new Dimension(width, height));
-        this.timer = new javax.swing.Timer(25, null);
+        this.timer = new javax.swing.Timer(5, null);
         this.timer.start();
         this.backgroundColor = backgroundColor;
         this.frame.pack();
@@ -206,8 +207,8 @@ public class Polygon {
      * refresh the image drawn on it.
      */
     private class VisualDescription {
-        private Shape visual;
-        private String color;
+        private final Shape visual;
+        private final String color;
 
         public VisualDescription(Shape visual, String color) {
             this.visual = visual;
